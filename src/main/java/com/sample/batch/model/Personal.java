@@ -14,7 +14,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
+public class Personal {
 
     @Id
     private Integer id;
@@ -25,7 +25,7 @@ public class Users {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Users{");
+        final StringBuffer sb = new StringBuffer("Personal {");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", dept='").append(dept).append('\'');

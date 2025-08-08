@@ -1,37 +1,33 @@
 package com.sample.batch.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class Personal {
+@Builder
+public class OutboxMessage {
 
     @Id
     @GeneratedValue
     @Column(name = "ID")
-    private Integer id;
+    private Long id;
 
-    @Column(name = "NAME")
-    private String name;
+    @Lob
+    @Column(name = "PAYLOAD")
+    private String payload;
 
-    @Column(name = "DEPT")
-    private String dept;
+    @Column(name="TOPIC")
+    private String topic;
 
-    @Column(name = "SALARY")
-    private Integer salary;
+    @Column(name = "ATTEMPTS")
+    private Integer attempts = 0;
 
     @CreatedDate
     @Column(updatable = false,name = "CREATE_DATE")

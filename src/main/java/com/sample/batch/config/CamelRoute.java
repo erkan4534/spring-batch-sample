@@ -25,9 +25,6 @@ public class CamelRoute extends RouteBuilder {
         from("direct:sendToKafka")
                 .routeId("kafkaProducerRoute")
                 .log("Kafka'ya gönderiliyor: ${body}")
-                .process(exchange -> {
-                    throw new RuntimeException("Kafka gönderim hatası");
-                })
                 .to("kafka:personal-topic?brokers=localhost:9092");
     }
 }

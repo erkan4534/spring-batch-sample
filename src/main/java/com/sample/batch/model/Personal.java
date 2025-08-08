@@ -1,15 +1,9 @@
 package com.sample.batch.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -33,11 +27,20 @@ public class Personal {
     @Column(name = "SALARY")
     private Integer salary;
 
-    @CreatedDate
-    @Column(updatable = false,name = "CREATE_DATE")
-    private LocalDateTime createDate;
+    @Column(name = "CREATE_DATE")
+    private LocalDate createDate;
 
-    @LastModifiedDate
     @Column(name = "UPDATE_DATE")
-    private LocalDateTime updateDate;
+    private LocalDate updateDate;
+
+    @PrePersist
+    public void onPrePersist() {
+        this.createDate = LocalDate.now();
+        this.updateDate = LocalDate.now();
+    }
+
+    @PreUpdate
+    public void onPreUpdate() {
+        this.updateDate = LocalDate.now();
+    }
 }

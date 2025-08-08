@@ -22,7 +22,7 @@ public class DBWriter implements ItemWriter<Personal> {
 
     @Override
     public void write(Chunk<? extends Personal> personalChunk) throws Exception {
-        System.out.println("Data Saved for Users: " + personalChunk);
+
         for (Personal personal : personalChunk) {
             try{
                 personalRepository.save(personal);

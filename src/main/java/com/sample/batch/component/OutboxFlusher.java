@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 import java.util.List;
 
 @Component
@@ -27,7 +26,7 @@ public class OutboxFlusher {
     // 5 sn’de bir çalışsın
     @Scheduled(fixedDelay = 5000)
     public void flush() {
-        Instant now = Instant.now();
+
         List<OutboxMessage> batch = outboxMessageRepository
                 .findTop200ByAttemptsLessThan(MAX_ATTEMPTS, Sort.by(Sort.Direction.ASC, "createDate"));
 
